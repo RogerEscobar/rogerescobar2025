@@ -2,20 +2,239 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================
+   FUENTE - Space Grotesk desde Google Fonts
+   ============================================ */
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
+
+/* ============================================
+   VARIABLES CSS - Tokens Semánticos
+   ============================================ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Fuente principal */
+  --font-space-grotesk: "Space Grotesk", system-ui, -apple-system, sans-serif;
+
+  /* ====== LIGHT MODE (default) ====== */
+  --color-background: #f1f1f1; /* neutral-100 */
+  --color-foreground: #060320; /* navy-700 - texto principal */
+  --color-muted: #073a79; /* blue-700 - texto secundario */
+
+  /* Colores de marca */
+  --color-primary: #ff2800; /* red-500 - Logo siempre contrasta */
+  --color-primary-hover: #b21c00; /* red-600 */
+  --color-accent: #06ead6; /* cyan-500 */
+  --color-danger: #ff2800; /* red-500 */
+
+  /* Bordes y divisores */
+  --color-border: rgba(6, 3, 32, 0.1); /* navy-700 con opacidad */
+
+  /* Sombras */
+  --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-card-hover: 0 20px 40px -10px rgba(27, 16, 147, 0.2); /* navy con opacidad */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ====== DARK MODE ====== */
+.dark {
+  --color-background: #1e1e1e; /* neutral-700 */
+  --color-foreground: #f1f1f1; /* neutral-100 - texto principal */
+  --color-muted: #ababab; /* neutral-500 - texto secundario */
+
+  /* Colores de marca (mismo rojo para contraste) */
+  --color-primary: #ff2800; /* red-500 */
+  --color-primary-hover: #ff5c3d; /* red-300 */
+  --color-accent: #06ead6; /* cyan-500 */
+
+  /* Bordes y divisores */
+  --color-border: rgba(241, 241, 241, 0.1); /* neutral-100 con opacidad */
+
+  /* Sombras */
+  --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  --shadow-card-hover: 0 20px 40px -10px rgba(6, 234, 214, 0.15); /* cyan con opacidad */
+}
+
+/* ============================================
+   RESET Y BASE STYLES
+   ============================================ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Prevenir scroll horizontal */
+  overflow-x: hidden;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-space-grotesk);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  line-height: 1.6;
+  /* Suavizado de fuentes */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Transición suave de temas */
+  transition:
+    background-color 300ms ease,
+    color 300ms ease;
+}
+
+/* ============================================
+   TIPOGRAFÍA - Mejoras de legibilidad
+   ============================================ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  /* Mejor kerning en títulos */
+  text-rendering: optimizeLegibility;
+}
+
+p {
+  /* Evitar líneas huérfanas */
+  orphans: 3;
+  widows: 3;
+}
+
+/* ============================================
+   IMÁGENES - Optimización
+   ============================================ */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* ============================================
+   LINKS - Comportamiento base
+   ============================================ */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 200ms ease;
+}
+
+/* ============================================
+   UTILIDADES PERSONALIZADAS
+   ============================================ */
+@layer utilities {
+  /* Balance de texto para títulos */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Scroll suave en contenedores */
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+
+  /* Ocultar scrollbar pero mantener funcionalidad */
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Filtro grayscale para imágenes */
+  .grayscale-image {
+    filter: grayscale(100%);
+    transition: filter 300ms ease;
+  }
+  .grayscale-image:hover {
+    filter: grayscale(0%);
+  }
+}
+
+/* ============================================
+   COMPONENTES BASE
+   ============================================ */
+@layer components {
+  /* Botón primario */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 
+           font-medium rounded-lg
+           transition-colors duration-200
+           focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+    background-color: var(--color-primary);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-primary-hover);
+  }
+
+  /* Botón secundario */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3
+           font-medium rounded-lg
+           transition-colors duration-200
+           focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2;
+    border: 2px solid var(--color-border);
+  }
+
+  .btn-secondary:hover {
+    border-color: rgba(6, 3, 32, 0.4);
+  }
+
+  /* Card base */
+  .card {
+    @apply rounded-xl shadow-md transition-shadow duration-300;
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+  }
+
+  .card:hover {
+    box-shadow: var(--shadow-card-hover);
+  }
+}
+
+/* ============================================
+   ACCESIBILIDAD
+   ============================================ */
+/* Focus visible mejorado */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Reducir movimiento para usuarios con preferencias */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================
+   DETECCIÓN DE CARGA DE FUENTE
+   ============================================ */
+/* Si Space Grotesk no carga, usará fallback */
+@supports not (font-family: "Space Grotesk") {
+  body::before {
+    content: "Fuente personalizada no disponible. Usando fuente del sistema.";
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    background: var(--color-danger);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    z-index: 9999;
+    opacity: 0.9;
+  }
 }
