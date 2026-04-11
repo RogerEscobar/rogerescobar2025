@@ -45,7 +45,9 @@ export default function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 border-b border-foreground/10 bg-background/80 backdrop-blur-sm">
+      <header
+        className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm"
+        style={{ borderBottom: "1px solid rgba(40, 23, 216, 0.2)" }}>
         <Container>
           <nav className="flex items-center justify-between py-4 md:py-6">
             {/* Logo */}
@@ -59,11 +61,10 @@ export default function Header() {
                 <Image
                   src="/images/logo/logo-full.svg"
                   alt="Roger Escobar"
-                  width={120}
-                  height={32}
+                  width={160}
+                  height={48}
                   priority
-                  className="h-8 w-auto"
-                  style={{ color: "var(--color-primary)" }}
+                  className="h-12 w-auto"
                 />
               </div>
 
@@ -76,7 +77,6 @@ export default function Header() {
                   height={32}
                   priority
                   className="h-8 w-8"
-                  style={{ color: "var(--color-primary)" }}
                 />
               </div>
             </Link>
@@ -91,8 +91,8 @@ export default function Header() {
                       href={item.href}
                       className={`text-body transition-colors duration-200 ${
                         isActive(item.href)
-                          ? "font-semibold text-foreground"
-                          : "text-muted hover:text-foreground"
+                          ? "font-semibold text-magenta-300"
+                          : "text-magenta-600 hover:text-magenta-500"
                       }`}>
                       {item.name}
                     </Link>

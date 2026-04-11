@@ -2,6 +2,7 @@ import Head from "next/head";
 import { motion } from "framer-motion";
 import Container from "../components/ui/Container";
 import ProjectCard from "../components/ui/ProjectCard";
+import ScrollIndicator from "../components/ui/ScrollIndicator";
 import {
   HOME_CONTENT,
   FEATURED_PROJECTS,
@@ -29,16 +30,16 @@ export default function Home() {
         <meta name="description" content={SITE_METADATA.description} />
       </Head>
 
-      {/* Hero Section */}
-      <section className="py-section-sm md:py-section">
+      {/* Hero Section - Fullscreen */}
+      <section className="relative flex min-h-screen items-center">
         <Container>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="flex min-h-[60vh] flex-col justify-center gap-6 md:gap-8">
+            className="flex flex-col gap-6 md:gap-8">
             {/* Título */}
-            <h1 className="text-display text-balance">
+            <h1 className="text-display text-balance text-cyan-500">
               {HOME_CONTENT.hero.title}
             </h1>
 
@@ -48,16 +49,35 @@ export default function Home() {
             </p>
           </motion.div>
         </Container>
+
+        {/* Scroll Indicator */}
+        <ScrollIndicator />
       </section>
 
       {/* BentoGrid Section - Proyectos Destacados */}
       <section className="py-section-sm md:py-section">
-        <Container>
-          {/* Grid asimétrico: 1 grande (2x2) + 4 pequeños (1x1) */}
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
+        {/* Container fullwidth para BentoGrid */}
+        <div className="mx-auto w-full px-4 md:px-6 lg:px-8">
+          {/* Grid asimétrico 6 columnas: 
+              - Proyecto 1 (large): 4 cols × 2 rows
+              - Proyectos 2-3: 2 cols × 1 row cada uno
+              - Proyectos 4-5: 3 cols × 1 row cada uno
+          */}
+          <div className="grid grid-cols-1 gap-2 md:grid-cols-6 md:gap-2">
             {FEATURED_PROJECTS.map((project, index) => {
               // Staging: proyecto grande primero, luego cascada
               const delay = index === 0 ? 0.2 : 0.2 + index * 0.1;
+
+              // Clases específicas por proyecto
+              let gridClasses = "";
+              if (project.size === "large") {
+                gridClasses = "md:col-span-4 md:row-span-2";
+              } else if (index === 1 || index === 2) {
+                gridClasses = "md:col-span-2 md:row-span-1";
+              } else {
+                // Proyectos 4 y 5
+                gridClasses = "md:col-span-3 md:row-span-1";
+              }
 
               return (
                 <motion.div
@@ -70,17 +90,13 @@ export default function Home() {
                     delay,
                     ease: [0.21, 0.45, 0.27, 0.9],
                   }}
-                  className={
-                    project.size === "large"
-                      ? "md:col-span-2 md:row-span-2"
-                      : ""
-                  }>
+                  className={gridClasses}>
                   <ProjectCard project={project} />
                 </motion.div>
               );
             })}
           </div>
-        </Container>
+        </div>
       </section>
     </>
   );

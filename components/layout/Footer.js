@@ -1,51 +1,20 @@
 import Container from "../ui/Container";
-import { FOOTER_CONTENT } from "../../lib/constants";
 
 /**
- * FOOTER - Pie de página simple
+ * FOOTER - Pie de página minimalista
  *
- * Layout horizontal en ambas vistas (mobile y desktop)
- * según tu especificación.
- *
- * Contenido:
- * - Copyright
- * - Links sociales (LinkedIn, Instagram)
- * - Ubicación
+ * Una sola línea con copyright y créditos
+ * Fondo sólido Navy-600
  */
 
 export default function Footer() {
   return (
-    <footer className="border-t border-foreground/10 py-8 text-body-sm text-muted">
+    <footer className="bg-navy-600 py-6 text-body-sm text-neutral-100">
       <Container>
-        <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
-          {/* Copyright */}
-          <span>{FOOTER_CONTENT.copyright}</span>
-
-          {/* Separador */}
-          <span className="text-foreground/20">·</span>
-
-          {/* Links sociales */}
-          {FOOTER_CONTENT.social.map((link, index) => (
-            <span key={link.name} className="flex items-center gap-4 md:gap-6">
-              <a
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="transition-colors hover:text-foreground">
-                {link.name}
-              </a>
-              {index < FOOTER_CONTENT.social.length - 1 && (
-                <span className="text-foreground/20">·</span>
-              )}
-            </span>
-          ))}
-
-          {/* Separador */}
-          <span className="text-foreground/20">·</span>
-
-          {/* Ubicación */}
-          <span>{FOOTER_CONTENT.location}</span>
-        </div>
+        <p className="text-center">
+          © 2026 Diseñado por Roger Escobar asistido por Claude, guiado por
+          criterio humano.
+        </p>
       </Container>
     </footer>
   );

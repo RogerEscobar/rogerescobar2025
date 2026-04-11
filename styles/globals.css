@@ -35,7 +35,7 @@
 
 /* ====== DARK MODE ====== */
 .dark {
-  --color-background: #1e1e1e; /* neutral-700 */
+  --color-background: #060320; /* navy-700 - Alineado con marca */
   --color-foreground: #f1f1f1; /* neutral-100 - texto principal */
   --color-muted: #ababab; /* neutral-500 - texto secundario */
 

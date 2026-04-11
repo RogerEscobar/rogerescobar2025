@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 import Image from "next/image";
 
 /**
@@ -13,34 +14,48 @@ import Image from "next/image";
  *     año: string (visible en hover)
  *     categoria: string (visible en hover)
  *     imagen: string (ruta de la imagen)
- *     size: 'large' | 'small' (para BentoGrid asimétrico)
  *   }
  *
  * Estados:
  * - Default: Imagen B&W + gancho visible
- * - Hover: Imagen color + elevación + info overlay
+ * - Hover (desktop): Imagen color + elevación + info overlay + glow cyan en bordes
  *
- * Estructura flexible para agregar tags y otros datos a futuro.
+ * Glow effect: Solo en desktop, sigue el mouse, ilumina bordes con cyan.
  */
 
 export default function ProjectCard({ project }) {
-  const { gancho, nombreProyecto, cliente, año, categoria, imagen, size } =
-    project;
+  const { gancho, nombreProyecto, cliente, año, categoria, imagen } = project;
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  // Clases según tamaño (para BentoGrid)
-  const sizeClasses = {
-    large: "md:col-span-2 md:row-span-2",
-    small: "md:col-span-1 md:row-span-1",
+  // Detectar posición del mouse para el glow effect (solo desktop)
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMousePosition({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
   };
 
   return (
     <motion.article
-      className={`group relative overflow-hidden rounded-xl bg-neutral-100 dark:bg-neutral-700 ${sizeClasses[size]}`}
+      className="group relative overflow-hidden rounded-xl bg-neutral-100 dark:bg-neutral-700"
       whileHover={{ y: -8 }}
       transition={{
         duration: 0.3,
-        ease: [0.34, 1.56, 0.64, 1], // bounce-subtle
-      }}>
+        ease: [0.34, 1.56, 0.64, 1],
+      }}
+      onMouseMove={handleMouseMove}>
+      {/* Glow effect en bordes (solo desktop) */}
+      <div
+        className="pointer-events-none absolute inset-0 hidden opacity-0 transition-opacity duration-300 group-hover:opacity-100 md:block"
+        style={{
+          background: `radial-gradient(400px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(6, 234, 214, 0.15), transparent 60%)`,
+        }}
+      />
+
+      {/* Borde que se ilumina con el glow */}
+      <div className="pointer-events-none absolute inset-0 rounded-xl border border-transparent transition-colors duration-300 group-hover:border-cyan-500/20" />
+
       {/* Imagen con filtro grayscale */}
       <div className="relative aspect-video w-full overflow-hidden">
         <Image

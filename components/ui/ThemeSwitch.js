@@ -10,8 +10,6 @@ import { useTheme } from "../ThemeProvider";
  * - Light mode: 💡 Bombillo encendido
  * - Dark mode: 💡 Bombillo quebrado (apagado)
  *
- * Nota: Los SVGs son placeholders simples.
- * Reemplázalos con tus diseños personalizados.
  */
 
 export default function ThemeSwitch({ variant = "nav" }) {

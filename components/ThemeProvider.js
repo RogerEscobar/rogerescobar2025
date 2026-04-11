@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 /**
  * THEME PROVIDER
  *
- * Maneja el estado del tema (light/dark) en toda la aplicación.
+ * Maneja el estado del tema (light/dark) en todo el portafolio.
  * Guarda la preferencia en localStorage y aplica la clase 'dark' al <html>.
  *
  * Uso:
