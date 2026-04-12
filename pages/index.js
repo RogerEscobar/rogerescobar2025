@@ -30,8 +30,10 @@ export default function Home() {
         <meta name="description" content={SITE_METADATA.description} />
       </Head>
 
-      {/* Hero Section - Fullscreen */}
-      <section className="relative flex min-h-screen items-center">
+      {/* Hero Section - Fullscreen con padding-top para pill menu */}
+      <section
+        id="hero-section"
+        className="relative flex min-h-screen items-center pt-24 md:pt-28">
         <Container>
           <motion.div
             initial={{ opacity: 0, y: 20 }}

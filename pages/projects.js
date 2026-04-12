@@ -29,7 +29,7 @@ export default function Proyectos() {
         />
       </Head>
 
-      <section className="py-section-sm md:py-section">
+      <section className="py-section-sm pt-24 md:py-section md:pt-28">
         <Container>
           {/* Header */}
           <motion.div

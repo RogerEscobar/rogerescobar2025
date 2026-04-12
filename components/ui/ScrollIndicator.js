@@ -5,22 +5,29 @@ import { useEffect, useState } from "react";
  * SCROLL INDICATOR - Indicador de scroll minimalista
  *
  * Línea vertical con dot animado que invita a hacer scroll.
- * Siempre visible cuando el usuario está en la sección hero.
- * Desaparece al salir del hero, reaparece al volver.
+ * Usa Intersection Observer para detectar si el hero está visible.
+ * Visible solo cuando al menos 50% del hero está en viewport.
  */
 
 export default function ScrollIndicator() {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    const handleScroll = () => {
-      // Visible solo cuando estás en el hero (primer viewport)
-      const isInHeroSection = window.scrollY < window.innerHeight;
-      setIsVisible(isInHeroSection);
-    };
+    const heroSection = document.querySelector("#hero-section");
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    if (!heroSection) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Visible solo si al menos 50% del hero está en viewport
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.9 }, // Visible solo si 90% del hero está en viewport
+    );
+
+    observer.observe(heroSection);
+
+    return () => observer.disconnect();
   }, []);
 
   return (

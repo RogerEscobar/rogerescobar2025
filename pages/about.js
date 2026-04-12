@@ -25,7 +25,7 @@ export default function About() {
         <meta name="description" content={ABOUT_CONTENT.sections.intro.lead} />
       </Head>
 
-      <section className="py-section-sm md:py-section">
+      <section className="py-section-sm pt-24 md:py-section md:pt-28">
         <Container>
           <div className="grid gap-12 md:grid-cols-2 md:gap-16 lg:gap-24">
             {/* Imagen + LinkedIn (orden 2 en mobile, orden 1 en desktop) */}
@@ -94,7 +94,7 @@ export default function About() {
                 <h1 className="mb-2 text-h1">
                   {ABOUT_CONTENT.sections.intro.title}
                 </h1>
-                <p className="text-h4 font-medium text-muted">
+                <p className="text-h4 font-medium text-cyan-500">
                   <TypeAnimation
                     sequence={[
                       "Graphic Designer",

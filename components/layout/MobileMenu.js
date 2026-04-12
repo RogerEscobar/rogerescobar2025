@@ -63,9 +63,18 @@ export default function MobileMenu() {
 
   return (
     <div className="md:hidden">
-      {/* Barra Toast Superior Fija */}
+      {/* Barra Toast Superior con Glassmorphism */}
       <div className="fixed left-0 right-0 top-4 z-50 px-4">
-        <div className="mx-auto flex max-w-md items-center justify-between rounded-full bg-navy-600 px-4 py-3 shadow-lg">
+        <div
+          className="mx-auto flex max-w-md items-center justify-between rounded-full px-4 py-3"
+          style={{
+            background: "rgba(17, 10, 92, 0.15)",
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
+            border: "1px solid rgba(96, 80, 236, 0.3)",
+            boxShadow:
+              "0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
+          }}>
           {/* Logo */}
           <Link
             href="/"
@@ -81,10 +90,10 @@ export default function MobileMenu() {
             />
           </Link>
 
-          {/* Botón Menú */}
+          {/* Botón Menú - Magenta 600 */}
           <button
             onClick={() => setIsOpen(true)}
-            className="rounded-full px-6 py-2 font-medium text-neutral-100 transition-colors hover:bg-neutral-100/10"
+            className="rounded-full px-6 py-2 font-semibold text-magenta-600 transition-colors hover:bg-neutral-100/10"
             aria-label="Abrir menú">
             Menú
           </button>
@@ -139,7 +148,7 @@ export default function MobileMenu() {
                 </svg>
               </button>
 
-              {/* Navegación */}
+              {/* Navegación con nuevos estados: magenta oscuro → brillante → cyan activo */}
               <nav className="flex flex-col items-center gap-8">
                 {NAV_ITEMS.map((item, index) => (
                   <motion.div
@@ -149,16 +158,21 @@ export default function MobileMenu() {
                     transition={{
                       delay: 0.1 + index * 0.1,
                       duration: 0.3,
-                    }}>
+                    }}
+                    className="relative">
                     <Link
                       href={item.href}
                       className={`text-4xl font-bold transition-colors ${
                         isActive(item.href)
-                          ? "text-magenta-300"
-                          : "text-magenta-600 hover:text-magenta-500"
+                          ? "text-cyan-500"
+                          : "text-magenta-600 hover:text-magenta-300"
                       }`}>
                       {item.name.toUpperCase()}
                     </Link>
+                    {/* Línea cyan indicadora de activo */}
+                    {isActive(item.href) && (
+                      <span className="absolute -bottom-2 left-0 right-0 h-px bg-cyan-500" />
+                    )}
                   </motion.div>
                 ))}
               </nav>
