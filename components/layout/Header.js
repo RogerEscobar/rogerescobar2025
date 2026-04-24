@@ -74,14 +74,14 @@ export default function Header() {
                     href={item.href}
                     className={`text-body font-semibold transition-colors duration-200 ${
                       isActive(item.href)
-                        ? "text-cyan-500"
-                        : "text-magenta-600 hover:text-magenta-300"
+                        ? "text-magenta-500 dark:text-cyan-500"
+                        : "text-cyan-700 hover:text-cyan-600 dark:text-magenta-600 dark:hover:text-magenta-300"
                     }`}>
                     {item.name}
                   </Link>
                   {/* Línea cyan indicadora de activo */}
                   {isActive(item.href) && (
-                    <span className="absolute -bottom-1 left-0 right-0 h-px bg-cyan-500" />
+                    <span className="absolute -bottom-1 left-0 right-0 h-px bg-magenta-500 dark:bg-cyan-500" />
                   )}
                 </div>
               ))}

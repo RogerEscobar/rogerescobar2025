@@ -1,5 +1,6 @@
 import Header from "./Header";
 import Footer from "./Footer";
+import AnimatedBackground from "../ui/AnimatedBackground";
 
 /**
  * LAYOUT - Wrapper principal para todas las páginas
@@ -16,6 +17,7 @@ import Footer from "./Footer";
 export default function Layout({ children }) {
   return (
     <div className="flex min-h-screen flex-col">
+      <AnimatedBackground />
       <Header />
 
       <main className="flex-1">{children}</main>

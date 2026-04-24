@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { TypeAnimation } from "react-type-animation";
 import Container from "../components/ui/Container";
 import { ABOUT_CONTENT } from "../lib/constants";
 
@@ -89,29 +88,13 @@ export default function About() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="order-1 flex flex-col gap-10 md:order-2">
-              {/* Intro con título typewriter dinámico */}
+              {/* Intro con profile name */}
               <div>
-                <h1 className="mb-2 text-h1">
+                <h1 className="mb-2 text-h1 text-magenta-500 dark:text-cyan-500">
                   {ABOUT_CONTENT.sections.intro.title}
                 </h1>
-                <p className="text-h4 font-medium text-cyan-500">
-                  <TypeAnimation
-                    sequence={[
-                      "Graphic Designer",
-                      2000,
-                      "Motion Designer",
-                      2000,
-                      "UX Designer",
-                      2000,
-                      "Product Designer",
-                      2000,
-                    ]}
-                    repeat={Infinity}
-                    speed={50}
-                    deletionSpeed={70}
-                  />
-                </p>
-                <p className="mt-6 text-body-lg text-muted">
+
+                <p className="mt-6 text-body-lg text-neutral-700 dark:text-neutral-300">
                   {ABOUT_CONTENT.sections.intro.lead}
                 </p>
               </div>
@@ -119,12 +102,12 @@ export default function About() {
               {/* Actualmente */}
               <div>
                 <div className="mb-4">
-                  <div className="mb-2 h-px w-12 bg-cyan-500" />
-                  <p className="text-body font-semibold uppercase tracking-wide text-muted">
+                  <div className="mb-2 h-px w-20 bg-magenta-500 dark:bg-cyan-500" />
+                  <p className="text-body font-semibold uppercase tracking-wide text-magenta-500 dark:text-cyan-500">
                     {ABOUT_CONTENT.sections.currently.title}
                   </p>
                 </div>
-                <p className="text-body-lg text-muted">
+                <p className="text-body-lg text-neutral-700 dark:text-neutral-300">
                   {ABOUT_CONTENT.sections.currently.content}
                 </p>
               </div>
@@ -132,12 +115,12 @@ export default function About() {
               {/* Experiencia */}
               <div>
                 <div className="mb-4">
-                  <div className="mb-2 h-px w-12 bg-cyan-500" />
-                  <p className="text-body font-semibold uppercase tracking-wide text-muted">
+                  <div className="mb-2 h-px w-20 bg-magenta-500 dark:bg-cyan-500" />
+                  <p className="text-body font-semibold uppercase tracking-wide text-magenta-500 dark:text-cyan-500">
                     {ABOUT_CONTENT.sections.experience.title}
                   </p>
                 </div>
-                <p className="text-body-lg text-muted">
+                <p className="text-body-lg text-neutral-700 dark:text-neutral-300">
                   {ABOUT_CONTENT.sections.experience.content}
                 </p>
               </div>
@@ -145,12 +128,12 @@ export default function About() {
               {/* Enfoque */}
               <div>
                 <div className="mb-4">
-                  <div className="mb-2 h-px w-12 bg-cyan-500" />
-                  <p className="text-body font-semibold uppercase tracking-wide text-muted">
+                  <div className="mb-2 h-px w-20 bg-magenta-500 dark:bg-cyan-500" />
+                  <p className="text-body font-semibold uppercase tracking-wide text-magenta-500 dark:text-cyan-500">
                     {ABOUT_CONTENT.sections.approach.title}
                   </p>
                 </div>
-                <p className="text-body-lg text-muted">
+                <p className="text-body-lg text-neutral-700 dark:text-neutral-300">
                   {ABOUT_CONTENT.sections.approach.content}
                 </p>
               </div>
@@ -158,18 +141,18 @@ export default function About() {
               {/* Stack principal */}
               <div>
                 <div className="mb-4">
-                  <div className="mb-2 h-px w-12 bg-cyan-500" />
-                  <p className="text-body font-semibold uppercase tracking-wide text-muted">
-                    Stack principal
+                  <div className="mb-2 h-px w-20 bg-magenta-500 dark:bg-cyan-500" />
+                  <p className="text-body font-semibold uppercase tracking-wide text-magenta-500 dark:text-cyan-500">
+                    Stack
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-3">
                   {ABOUT_CONTENT.stack.map((skill) => (
                     <span
                       key={skill}
-                      className="rounded-full px-4 py-2 text-body-sm font-medium transition-colors hover:bg-foreground hover:text-background"
+                      className="rounded-full px-4 py-2 text-body-sm font-medium transition-colors hover:bg-foreground hover:text-magenta-500 dark:hover:text-cyan-500"
                       style={{
-                        border: "1px solid var(--color-border)",
+                        border: "2px solid var(--color-border)",
                         backgroundColor: "transparent",
                       }}>
                       {skill}

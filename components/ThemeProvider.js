@@ -17,7 +17,7 @@ const ThemeContext = createContext({
 });
 
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("dark");
   const [mounted, setMounted] = useState(false);
 
   // Detectar tema inicial (localStorage o preferencia del sistema)
@@ -32,10 +32,7 @@ export function ThemeProvider({ children }) {
       setTheme(savedTheme);
     } else {
       // 2. Si no hay guardado, usar preferencia del sistema
-      const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)",
-      ).matches;
-      setTheme(prefersDark ? "dark" : "light");
+      setTheme("dark");
     }
   }, []);
 
